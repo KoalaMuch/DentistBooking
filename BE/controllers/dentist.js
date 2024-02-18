@@ -1,4 +1,5 @@
 const Dentist = require("../models/Dentist");
+const Review = require("../models/Review");
 
 //@desc Get all dentist
 //@route GET /api/v1/dentists
@@ -92,7 +93,23 @@ exports.getDentist = async (req, res, next) => {
     if (!dentist) {
       return res.status(400).json({ success: false });
     }
-    res.status(200).json({ success: true, data: dentist });
+    dentist["avg_rating"] = await Review.aggregate([
+      {
+        $match: {
+          dentist: req.param.id,
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          average: {
+            $avg: "rating",
+          },
+        },
+      },
+    ])
+      .status(200)
+      .json({ success: true, data: dentist });
   } catch (err) {
     res.status(400).json({ success: false });
   }
