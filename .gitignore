@@ -131,3 +131,5 @@ dist
 
 
 BE/config/config.env
+
+FE/config/config.env
