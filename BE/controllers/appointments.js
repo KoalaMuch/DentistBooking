@@ -1,6 +1,8 @@
 const Appointment = require("../models/Appointment");
 const Dentist = require("../models/Dentist");
 
+const limit = process.env.APPOINTMENT_LIMIT || 1;
+
 //@desc Get all appointments
 //@route GET /api/v1/appointments
 //@access Public
@@ -65,14 +67,14 @@ exports.addAppointment = async (req, res, next) => {
     // Check for exist appointment
     const existedAppointments = await Appointment.find({ user: req.user.id });
 
-    // If the user is not admin, they can only create 3 appointment.
-    if (req.user.role !== "admin" && existedAppointments.length >= 1) {
+    // If the user is not admin, they can only create 1 appointment.
+    if (req.user.role !== "admin" && existedAppointments.length >= limit) {
       return res.status(400).json({
         success: false,
         message:
           "The user with ID " +
           req.user.id +
-          " has already booked 3 appointments",
+          `has already booked ${limit} appointments`,
       });
     }
 
