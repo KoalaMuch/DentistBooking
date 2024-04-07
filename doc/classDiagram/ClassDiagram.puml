@@ -1,0 +1,120 @@
+@startuml
+left to right direction
+package "Dentist Booking System"{
+    class "<<Application>>\nDentist Booking Service" as DentistBookingService{}
+
+' dentists
+    class "<<Resource>>\nDentists" as ResourceDentists{
+        <<GET>> +getDentists(): Destist
+        <<POST>> +createDentist(): Dentist
+    }
+
+    class "<<Resource>>\nDentist" as ResourceDentist {
+        <<GET>> +getDentist(): Dentist
+        <<PUT>> +updateDentist(): Dentist
+        <<DELETE>> +deleteDentist(): void
+    }
+
+    class "<<Representation>>\nDentist" as RepresentationDentist {
+        -name
+        -yearOfExp
+        -areaOfExpertise
+        -clinic
+    }
+
+    ' auth
+    class "<<Resource>>User" as ResourceUserRegister{
+        <<POST>> +register(): User
+    }
+    class "<<Resource>>User" as ResourceUserLogin{
+        <<POST>> +login(): User
+    }
+    class "<<Resource>>User" as ResourceUser{
+        <<GET>> +me(): User
+    }
+    class "<<Resource>>User" as ResourceUserLogout{
+        <<GET>> +logout(): void
+    }
+    class "<<Representation>>\nUser" as RepresentationUser {
+        -name
+        -tel
+        -email
+        -password
+        -role
+    }
+
+    ' clinic
+    class "<<Resource>>Clinics" as ResourceClinics{
+        <<GET>> +getClinics(): Clinic
+    } 
+    class "<<Representation>>\nClinic" as RepresentationClinic {
+        -name
+        -address
+        -district
+        -province
+        -postalcode
+        -tel
+        -region
+    }
+
+    ' appointment
+    class "<<Resource>>\nAppointments" as ResourceAppointments{
+        <<GET>> +getAppointments(): Appointment
+        <<POST>> +addAppointment(): Appointment
+    }
+    class "<<Resource>>\nAppointment" as ResourceAppointment{
+        <<GET>> +getAppointment(): Appointment
+        <<PUT>> +updateAppointment(): Appointment
+        <<DELETE>> +deleteAppointment(): void
+    }
+    class "<<Representation>>\nAppointment" as RepresentationAppointment {
+        -apptDate
+        -user
+        -dentist
+        -createdAt
+    }
+
+    ' review
+    class "<<Resource>>\nCreate Review" as ResourceCreateReview{
+        <<POST>> +createReview(): Review
+    } 
+    class "<<Resource>>\nReviews" as ResourceReviews{
+        <<GET>> +getReviews(): Review
+    }
+    class "<<Resource>>\nReview" as ResourceReview{
+        <<PUT>> +updateReview(): Review
+        <<DELETE>> +deleteReview(): void
+    } 
+    class "<<Representation>>\nReview" as RepresentationReview{
+        -user
+        -dentist
+        -rating
+        -comment
+    } 
+}
+
+DentistBookingService ..> ResourceDentists:"/dentists\n<<Path>>"
+ResourceDentists ..> ResourceDentist: "/{dentistId}\n<<Path>>"
+ResourceDentist ..> RepresentationDentist: "<<use>>"
+
+DentistBookingService ..> ResourceUserRegister: "/register\n<<Path>>"
+ResourceUserRegister ..>RepresentationUser: "<<use>>"
+DentistBookingService ..> ResourceUserLogin: "/login\n<<Path>>"
+ResourceUserLogin ..>RepresentationUser: "<<use>>"
+DentistBookingService ..> ResourceUser: "/me\n<<Path>>"
+ResourceUser ..>RepresentationUser: "<<use>>"
+DentistBookingService ..> ResourceUserLogout: "/logout\n<<Path>>"
+
+DentistBookingService ..> ResourceClinics:"/clinics\n<<Path>>"
+ResourceClinics ..> RepresentationClinic:"<<use>>"
+
+DentistBookingService ..> ResourceAppointments:"/appointments\n<<Path>>"
+ResourceAppointments ..> ResourceAppointment: "/{appointmentId}\n<<Path>>"
+ResourceAppointment ..> RepresentationAppointment: "<<use>>"
+
+DentistBookingService ..> ResourceCreateReview:"/reviews\n<<Path>>"
+ResourceCreateReview ..> ResourceReviews:"/{:dentistId}\n<<Path>>"
+ResourceCreateReview..> ResourceReview:"/{:reviewId}\n<<Path>>"
+ResourceReviews..>RepresentationReview:"<<use>>"
+ResourceReview..>RepresentationReview:"<<use>>"
+@enduml
