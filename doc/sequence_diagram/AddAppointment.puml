@@ -1,0 +1,46 @@
+@startuml Manage Appointment (POST)
+
+header Dentist Booking Sequence Diagram
+footer Page %page% of %lastpage%
+title "Manage Appointment (POST)"
+
+participant "Client" as client
+participant "<<javaScript>>\n:server" as server
+participant "<<router>>\n:appointments" as routerAppointments
+participant "<<controllers>>\n:appointments" as controllersAppointments
+participant "<<model>>\n:Appointment" as modelAppointment
+participant "<<model>>\n:Dentist" as modelDentist
+database "<<MongoDB>>\n:appointments" as AppointmentsDatabase
+database "<<MongoDB>>\n:dentists" as DentistsDatabase
+
+client->server ++:req.post('/dentist/:dentistId/appointments')
+server->routerAppointments ++:app.use('/appointments',appointments)
+routerAppointments -> controllersAppointments ++:addAppointment()
+
+alt Check if appointment reach limit
+    controllersAppointments->modelAppointment ++:find({user: req.user.id})
+    modelAppointment ->AppointmentsDatabase ++: AppointmentSchema
+    AppointmentsDatabase --> modelAppointment --: appointments
+    controllersAppointments <-- modelAppointment --:appointments
+    alt Appointment Count less than limit
+        alt Check if Dentist Exists
+            controllersAppointments->modelDentist ++:findById(req.params.dentistId)
+            modelDentist -> DentistsDatabase ++: DentistSchema
+            DentistsDatabase --> modelDentist --: dentist
+            controllersAppointments <-- modelDentist --:dentist
+            alt Dentist Exists
+                controllersAppointments->modelAppointment ++:create(req.body)
+                modelAppointment ->AppointmentsDatabase ++: AppointmentSchema
+                AppointmentsDatabase --> modelAppointment --: appointment
+                controllersAppointments <-- modelAppointment --:appointment
+                controllersAppointments->client --:response
+            else Dentist Doesn't Exist
+                controllersAppointments->client --:response
+            end
+        end
+    else Appointment Count reached limit
+        controllersAppointments->client --:response
+    end
+end
+
+@enduml
