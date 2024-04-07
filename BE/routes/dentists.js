@@ -207,10 +207,12 @@ const {
 const { protect, authorize } = require("../middleware/auth");
 
 const appointmentRouter = require("./appointments");
+const reviewRouter = require("./reviews");
 
 const router = express.Router();
 
 router.use("/:dentistId/appointments", appointmentRouter);
+router.use("/:dentistId/reviews", reviewRouter);
 
 router
   .route("/")

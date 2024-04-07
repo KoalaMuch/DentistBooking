@@ -63,13 +63,15 @@ package "Dentist Booking System"{
     ' appointment
     class "<<Resource>>\nAppointments" as ResourceAppointments{
         <<GET>> +getAppointments(): Appointment
-        <<POST>> +addAppointment(): Appointment
     }
     class "<<Resource>>\nAppointment" as ResourceAppointment{
         <<GET>> +getAppointment(): Appointment
         <<PUT>> +updateAppointment(): Appointment
         <<DELETE>> +deleteAppointment(): void
     }
+     class "<<Resource>>\nDentistAppointments" as ResourceDentistAppointments{
+        <<POST>> +addAppointment(): Appointment
+    } 
     class "<<Representation>>\nAppointment" as RepresentationAppointment {
         -apptDate
         -user
@@ -77,29 +79,13 @@ package "Dentist Booking System"{
         -createdAt
     }
 
-    ' review
-    class "<<Resource>>\nReviews" as ResourceReviews{
-        <<GET>> +getReviews(): Review
-        <<POST>> +createReview(): Review
-    } 
-    class "<<Resource>>\nDentist Reviews" as ResourceDentistReviews{
-        <<GET>> +getReviewsByDentistId(): Review
-    }
-    class "<<Resource>>\nReview" as ResourceReview{
-        <<PUT>> +updateReview(): Review
-        <<DELETE>> +deleteReview(): void
-    } 
-    class "<<Representation>>\nReview" as RepresentationReview{
-        -user
-        -dentist
-        -rating
-        -comment
-    } 
 }
 
 DentistBookingService ..> ResourceDentists:"/dentists\n<<Path>>"
 ResourceDentists ..> ResourceDentist: "/{dentistId}\n<<Path>>"
 ResourceDentist ..> RepresentationDentist: "<<use>>"
+ResourceDentist ..> ResourceDentistAppointments:"/reviews\n<<Path>>"
+ResourceDentistAppointments..>RepresentationAppointment:"<<use>>"
 
 DentistBookingService..>ResourceAuth:"/auth\n<<Path>>"
 ResourceAuth..> ResourceUserRegister: "/register\n<<Path>>"
@@ -116,10 +102,4 @@ ResourceClinics ..> RepresentationClinic:"<<use>>"
 DentistBookingService ..> ResourceAppointments:"/appointments\n<<Path>>"
 ResourceAppointments ..> ResourceAppointment: "/{appointmentId}\n<<Path>>"
 ResourceAppointment ..> RepresentationAppointment: "<<use>>"
-
-DentistBookingService ..> ResourceReviews:"/reviews\n<<Path>>"
-ResourceReviews ..> ResourceDentistReviews:"/{:dentistId}\n<<Path>>"
-ResourceReviews..> ResourceReview:"/{:reviewId}\n<<Path>>"
-ResourceDentistReviews..>RepresentationReview:"<<use>>"
-ResourceReview..>RepresentationReview:"<<use>>"
 @enduml

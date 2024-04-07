@@ -1,0 +1,25 @@
+@startuml VacQ System Use Case Diagram
+left to right direction
+actor "User" as user
+rectangle "Dentist Booking System" as VacQSystem {    
+    usecase "Login" as login
+    usecase "Logout" as logout
+    usecase "Register" as register
+    usecase "View\nMy Profile" as viewUserInformation
+    usecase "View Dentist Review" as viewDentistReview
+    usecase ""
+    usecase "View\nHospitals" as viewHospitals
+    usecase "Manage\nAppointment" as manageAppt
+    usecase "Manage\nHospital" as manageHospital
+}
+
+user -- register
+user -- viewHospitals
+user -- manageAppt
+
+actor "Admin" as admin
+register -- admin
+manageHospital -- admin
+manageAppt -- admin
+
+@enduml

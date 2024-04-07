@@ -178,7 +178,6 @@
 const express = require("express");
 
 const {
-  getReviews,
   createReview,
   updateReview,
   deleteReview,
@@ -187,14 +186,12 @@ const {
 
 const { protect, authorize } = require("../middleware/auth");
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router
   .route("/")
   .post(protect, authorize("user"), createReview)
-  .get(getReviews);
-
-router.route("/:dentistId").get(getReviewsByDentistId);
+  .get(getReviewsByDentistId);
 
 router
   .route("/:id")
