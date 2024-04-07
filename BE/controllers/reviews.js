@@ -1,9 +1,26 @@
 const Review = require("../models/Review");
 
-//@desc Get all reviews of the dentist
+//@desc Get all reviews
 //@route GET /api/v1/reviews
 //@access Public
 exports.getReviews = async (req, res, next) => {
+  try {
+    const reviews = await Review.find().populate("user", "name");
+    res.status(200).json({
+      success: true,
+      count: reviews.length,
+      data: reviews,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ success: false });
+  }
+};
+
+//@desc Get all reviews of the dentist
+//@route GET /api/v1/reviews/:dentistId
+//@access Public
+exports.getReviewsByDentistId = async (req, res, next) => {
   try {
     const reviews = await Review.find({
       dentist: req.params.dentistId,

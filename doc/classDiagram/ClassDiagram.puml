@@ -23,16 +23,19 @@ package "Dentist Booking System"{
     }
 
     ' auth
-    class "<<Resource>>User" as ResourceUserRegister{
+    class "<<Resource>>Auth" as ResourceAuth{
+        
+    }
+    class "<<Resource>>Register" as ResourceUserRegister{
         <<POST>> +register(): User
     }
-    class "<<Resource>>User" as ResourceUserLogin{
+    class "<<Resource>>Login" as ResourceUserLogin{
         <<POST>> +login(): User
     }
     class "<<Resource>>User" as ResourceUser{
         <<GET>> +me(): User
     }
-    class "<<Resource>>User" as ResourceUserLogout{
+    class "<<Resource>>Logout" as ResourceUserLogout{
         <<GET>> +logout(): void
     }
     class "<<Representation>>\nUser" as RepresentationUser {
@@ -75,11 +78,12 @@ package "Dentist Booking System"{
     }
 
     ' review
-    class "<<Resource>>\nCreate Review" as ResourceCreateReview{
-        <<POST>> +createReview(): Review
-    } 
     class "<<Resource>>\nReviews" as ResourceReviews{
         <<GET>> +getReviews(): Review
+        <<POST>> +createReview(): Review
+    } 
+    class "<<Resource>>\nDentist Reviews" as ResourceDentistReviews{
+        <<GET>> +getReviewsByDentistId(): Review
     }
     class "<<Resource>>\nReview" as ResourceReview{
         <<PUT>> +updateReview(): Review
@@ -97,13 +101,14 @@ DentistBookingService ..> ResourceDentists:"/dentists\n<<Path>>"
 ResourceDentists ..> ResourceDentist: "/{dentistId}\n<<Path>>"
 ResourceDentist ..> RepresentationDentist: "<<use>>"
 
-DentistBookingService ..> ResourceUserRegister: "/register\n<<Path>>"
+DentistBookingService..>ResourceAuth:"/auth\n<<Path>>"
+ResourceAuth..> ResourceUserRegister: "/register\n<<Path>>"
 ResourceUserRegister ..>RepresentationUser: "<<use>>"
-DentistBookingService ..> ResourceUserLogin: "/login\n<<Path>>"
+ResourceAuth ..> ResourceUserLogin: "/login\n<<Path>>"
 ResourceUserLogin ..>RepresentationUser: "<<use>>"
-DentistBookingService ..> ResourceUser: "/me\n<<Path>>"
+ResourceAuth ..> ResourceUser: "/me\n<<Path>>"
 ResourceUser ..>RepresentationUser: "<<use>>"
-DentistBookingService ..> ResourceUserLogout: "/logout\n<<Path>>"
+ResourceAuth ..> ResourceUserLogout: "/logout\n<<Path>>"
 
 DentistBookingService ..> ResourceClinics:"/clinics\n<<Path>>"
 ResourceClinics ..> RepresentationClinic:"<<use>>"
@@ -112,9 +117,9 @@ DentistBookingService ..> ResourceAppointments:"/appointments\n<<Path>>"
 ResourceAppointments ..> ResourceAppointment: "/{appointmentId}\n<<Path>>"
 ResourceAppointment ..> RepresentationAppointment: "<<use>>"
 
-DentistBookingService ..> ResourceCreateReview:"/reviews\n<<Path>>"
-ResourceCreateReview ..> ResourceReviews:"/{:dentistId}\n<<Path>>"
-ResourceCreateReview..> ResourceReview:"/{:reviewId}\n<<Path>>"
-ResourceReviews..>RepresentationReview:"<<use>>"
+DentistBookingService ..> ResourceReviews:"/reviews\n<<Path>>"
+ResourceReviews ..> ResourceDentistReviews:"/{:dentistId}\n<<Path>>"
+ResourceReviews..> ResourceReview:"/{:reviewId}\n<<Path>>"
+ResourceDentistReviews..>RepresentationReview:"<<use>>"
 ResourceReview..>RepresentationReview:"<<use>>"
 @enduml
