@@ -34,6 +34,8 @@ exports.getClinics = async (req, res, next) => {
       };
     }
 
+    pagination.totalPage = Math.ceil(total / limit);
+
     res.status(200).json({
       success: true,
       count: clinics.length,
