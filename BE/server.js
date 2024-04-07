@@ -68,10 +68,10 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-const hospitals = require("./routes/hospitals");
+const hospitals = require("./routes/dentists");
 
 // Mount routers
-app.use("/api/v1/hospitals", hospitals);
+app.use("/api/v1/dentists", hospitals);
 
 const auth = require("./routes/auth");
 

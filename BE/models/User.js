@@ -27,6 +27,11 @@ const UserSchema = new mongoose.Schema({
     minlength: 6,
     select: false,
   },
+  tel: {
+    type: String,
+    required: [true, "Please add telephone number"],
+    length: 10,
+  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
   createdAt: {
