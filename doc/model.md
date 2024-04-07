@@ -26,12 +26,12 @@ This is mongoose schema for dentist booking application
 
 ## Dentist
 
-| Field            | Type                     |
-| ---------------- | ------------------------ |
-| name             | string                   |
-| yearOfExperience | int                      |
-| areaOfExpertise  | []string                 |
-| clinic           | mongoose.schema.objectId |
+| Field           | Type                     |
+| --------------- | ------------------------ |
+| name            | string                   |
+| yearOfExp       | int                      |
+| areaOfExpertise | []string                 |
+| clinic          | mongoose.schema.objectId |
 
 ## Appointment
 

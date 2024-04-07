@@ -40,4 +40,4 @@ const ClinicSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Clinic", ClinicSchema);
+module.exports = mongoose.model("Clinic", ClinicSchema);
