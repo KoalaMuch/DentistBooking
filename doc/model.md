@@ -17,6 +17,7 @@ This is mongoose schema for dentist booking application
 | Field      | Type   |
 | ---------- | ------ |
 | name       | string |
+| address    | string |
 | district   | string |
 | province   | string |
 | postalcode | string |
