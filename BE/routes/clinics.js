@@ -80,3 +80,5 @@ const { getClinics } = require("../controllers/clinics");
 const router = express.Router();
 
 router.route("/").get(getClinics);
+
+module.exports = router;

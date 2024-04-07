@@ -13,11 +13,11 @@
  *      id:
  *         type: string
  *         format: uuid
- *         description: The auto-generated id of the hospital
+ *         description: The auto-generated id of the dentist
  *         example: 290f1ee-6c54-4b01-90e6-d701748f0851
  *      name:
  *          type: string
- *          description: Hospital name
+ *          description: dentist name
  *      yearOfExp:
  *          type: number
  *          description: years of experience
@@ -45,11 +45,11 @@
  *      id:
  *         type: string
  *         format: uuid
- *         description: The auto-generated id of the hospital
+ *         description: The auto-generated id of the dentist
  *         example: 290f1ee-6c54-4b01-90e6-d701748f0851
  *      name:
  *          type: string
- *          description: Hospital name
+ *          description: dentist name
  *      yearOfExp:
  *          type: number
  *          description: years of experience
@@ -118,82 +118,82 @@
  *           schema:
  *             $ref: '#/components/schemas/Dentist'
  *     404:
- *       description: The hospital was not found
+ *       description: The dentist was not found
  */
 
 /**
  * @swagger
- * /hospitals:
+ * /dentists:
  *   post:
- *     summary: Create a new hospital
- *     tags: [Hospitals]
+ *     summary: Create a new dentist
+ *     tags: [Dentists]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Hospital'
+ *             $ref: '#/components/schemas/Dentist'
  *     responses:
  *       201:
- *         description: The hospital was successfully created
+ *         description: The dentist was successfully created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Hospital'
+ *               $ref: '#/components/schemas/Dentist'
  *       500:
  *         description: Some server error
  */
 
 /**
  * @swagger
- * /hospitals/{id}:
+ * /dentists/{id}:
  *   put:
- *     summary: Update the hospital by the id
- *     tags: [Hospitals]
+ *     summary: Update the dentist by the id
+ *     tags: [Dentists]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The hospital id
+ *         description: The dentist id
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Hospital'
+ *             $ref: '#/components/schemas/Dentist'
  *     responses:
  *       200:
- *         description: The hospital was updated
+ *         description: The dentist was updated
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Hospital'
+ *               $ref: '#/components/schemas/Dentist'
  *       404:
- *         description: The hospital was not found
+ *         description: The dentist was not found
  *       500:
  *         description: Some error happened
  */
 
 /**
  * @swagger
- * /hospitals/{id}:
+ * /dentists/{id}:
  *   delete:
- *     summary: Remove the hospital by id
- *     tags: [Hospitals]
+ *     summary: Remove the dentist by id
+ *     tags: [dentists]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The hospital id
+ *         description: The dentist id
  *     responses:
  *       200:
- *         description: The hospital was deleted
+ *         description: The dentist was deleted
  *       404:
- *         description: The hospital was not found
+ *         description: The dentist was not found
  */
 
 const express = require("express");
