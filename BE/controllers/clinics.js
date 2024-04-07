@@ -2,7 +2,7 @@ const Clinic = require("../models/Clinic");
 
 exports.getClinics = async (req, res, next) => {
   try {
-    let query = await Clinic.find();
+    let query = Clinic.find();
 
     // Pagination
     const page = parseInt(req.query.page, 10) || 1;
