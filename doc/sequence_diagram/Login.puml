@@ -1,4 +1,4 @@
-@startuml Manage Auth (POST)
+@startuml Manage Auth (Login)
 
 header Dentist Booking Sequence Diagram
 footer Page %page% of %lastpage%
