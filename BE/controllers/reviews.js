@@ -34,7 +34,7 @@ exports.createReview = async (req, res, next) => {
 //@access Private
 exports.updateReview = async (req, res, next) => {
   try {
-    let review = await Review.findById(req.params.id);
+    const review = await Review.findById(req.params.id);
     if (!review) {
       return res.status(404).json({
         success: false,
@@ -45,7 +45,7 @@ exports.updateReview = async (req, res, next) => {
     if (review.user.toString() !== req.user.id && req.user.role !== "admin") {
       return res.status(401).json({
         success: false,
-        message: `User ${req.params.id} is not authorized to update this review`,
+        message: `User ${req.user.id} is not authorized to update this review`,
       });
     }
     review = await Review.findByIdAndUpdate(req.params.id, req.body, {
@@ -75,7 +75,7 @@ exports.deleteReview = async (req, res, next) => {
     if (review.user.toString() !== req.user.id && req.user.role !== "admin") {
       return res.status(401).json({
         success: false,
-        message: `User ${req.params.id} is not authorized to update this review`,
+        message: `User ${req.user.id} is not authorized to update this review`,
       });
     }
     await review.deleteOne();
