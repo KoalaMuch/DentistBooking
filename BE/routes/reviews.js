@@ -176,6 +176,7 @@
  */
 
 const express = require("express");
+
 const {
   getReviews,
   createReview,
@@ -184,7 +185,6 @@ const {
 } = require("../controllers/reviews");
 
 const { protect, authorize } = require("../middleware/auth");
-const { create } = require("../models/Review");
 
 const router = express.Router();
 
