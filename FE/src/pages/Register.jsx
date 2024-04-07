@@ -7,12 +7,13 @@ import { register, reset } from "../features/auth/authSlice";
 function Register() {
   const [formData, setFormData] = useState({
     name: "",
+    tel: "",
     email: "",
     password: "",
     password2: "",
     role: "user",
   });
-  const { name, email, password, password2, role } = formData;
+  const { name, tel, email, password, password2, role } = formData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ function Register() {
     } else {
       const userData = {
         name,
+        tel,
         email,
         password,
         role,
@@ -72,6 +74,18 @@ function Register() {
               value={name}
               onChange={onChange}
               placeholder="Enter Your name"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              id="tel"
+              name="tel"
+              value={tel}
+              onChange={onChange}
+              placeholder="Enter Your Telephone Number"
               required
             />
           </div>

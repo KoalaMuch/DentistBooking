@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "./components/Header";
+import Header from "./components/common/Header";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Clinic from "./pages/clinic/Index";
+import ClinicId from "./pages/clinic/clinicId/Index";
 function App() {
   return (
     <>
@@ -15,6 +17,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/clinic">
+              <Route index element={<Clinic />}></Route>
+              <Route path=":clinicId" element={<ClinicId />}></Route>
+            </Route>
           </Routes>
         </div>
       </Router>

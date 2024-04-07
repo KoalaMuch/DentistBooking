@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 * {
   margin: 0;
@@ -7,8 +7,7 @@
 }
 
 body {
-  font-family:
-    'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   height: 100vh;
 }
 
@@ -38,9 +37,7 @@ h3 {
 
 .container {
   width: 100%;
-  max-width: 960px;
   margin: 0 auto;
-  padding: 0 20px;
   text-align: center;
 }
 
@@ -48,9 +45,9 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px 20px;
   border-bottom: 1px solid #e6e6e6;
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
 }
 
 .header ul {
@@ -83,8 +80,27 @@ h3 {
   padding: 0 20px;
 }
 
+.heading-picture {
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heading-picture img {
+  width: 100%;
+}
+
 .heading p {
   color: #828282;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  padding: 0 20px;
 }
 
 .boxes {
@@ -104,8 +120,7 @@ h3 {
 }
 
 .boxes h2 {
-  margin-top:
-    20px;
+  margin-top: 20px;
 }
 
 .boxes a:hover {
@@ -124,8 +139,7 @@ h3 {
 .form-group input,
 .form-group textarea,
 .form-group select {
-  width:
-    100%;
+  width: 100%;
   padding: 10px;
   border: 1px solid #e6e6e6;
   border-radius: 5px;
@@ -199,8 +213,7 @@ h3 {
 }
 
 .ticket-number h2 {
-  font-size:
-    2.3rem;
+  font-size: 2.3rem;
   margin-bottom: 10px;
 }
 
@@ -238,8 +251,7 @@ h3 {
   justify-self: center;
   border-radius: 10px;
   font-size: 16px;
-  text-align:
-    center;
+  text-align: center;
 }
 
 .status-new {
@@ -268,8 +280,7 @@ h3 {
 .ticket-page h2 {
   display: flex;
   align-items: center;
-  justify-content:
-    space-between;
+  justify-content: space-between;
 }
 
 .ticket-page .btn {
@@ -284,8 +295,7 @@ h3 {
 .ticket-desc {
   margin: 20px 0;
   font-size: 17px;
-  background-color:
-    #f4f4f4;
+  background-color: #f4f4f4;
   border: 1px #ccc solid;
   padding: 10px 15px;
   border-radius: 5px;
@@ -296,8 +306,7 @@ h3 {
   border-radius: 5px;
   text-align: left;
   padding: 20px;
-  margin-bottom:
-    20px;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -360,8 +369,7 @@ p.status-complete {
 footer {
   position: sticky;
   top: 95vh;
-  text-align:
-    center;
+  text-align: center;
 }
 
 .loadingSpinnerContainer {

@@ -1,6 +1,7 @@
+import { BASE_URL_V1 } from "@/config/config";
 import axios from "axios";
 
-const API_URL = "http://localhost:20000/api/v1/auth/";
+const API_URL = `${BASE_URL_V1}/auth/`;
 
 // Register a new user
 const register = async (userData) => {

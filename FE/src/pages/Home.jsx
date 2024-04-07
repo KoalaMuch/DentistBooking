@@ -6,7 +6,7 @@ function Home() {
       <section className="heading">
         <h1>A Dentist Booking System</h1>
       </section>
-      <Link to="/new-ticket" className="btn btn-reverse btn-block">
+      <Link to="/clinic" className="btn btn-reverse btn-block">
         <FaQuestionCircle />
         Create New Appointment
       </Link>
