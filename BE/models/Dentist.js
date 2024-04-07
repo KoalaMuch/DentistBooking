@@ -14,8 +14,13 @@ const DentistSchema = new mongoose.Schema(
       required: [true, "Please add year of experience"],
     },
     areaOfExpertise: {
-      type: String,
+      type: [String],
       required: [true, "Please add area of expertise"],
+    },
+    clinic: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Clinic",
+      required: true,
     },
   },
   {
@@ -24,12 +29,14 @@ const DentistSchema = new mongoose.Schema(
   }
 );
 
-// Cascade delete appointments when a hospital is deleted
+// Cascade delete appointments and review when a dentist is deleted
 DentistSchema.pre(
   "deleteOne",
   { document: true, query: false },
   async function (next) {
-    console.log(`Appointments being removed from dentist ${this._id}`);
+    console.log(
+      `Appointments and reviews being removed from dentist ${this._id}`
+    );
     await this.model("Appointment").deleteMany({ dentist: this._id });
     await this.model("Review").deleteMany({ dentist: this._id });
     next();

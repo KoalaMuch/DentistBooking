@@ -93,7 +93,7 @@ exports.getDentist = async (req, res, next) => {
     if (!dentist) {
       return res.status(400).json({ success: false });
     }
-    dentist["avg_rating"] = await Review.aggregate([
+    dentist["avgRating"] = await Review.aggregate([
       {
         $match: {
           dentist: req.param.id,

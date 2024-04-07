@@ -4,36 +4,86 @@ This is endpoints for dentist booking application
 
 ## User `/auth`
 
-### Register `/register`
+### Register `POST /register`
 
 register new user to system
 
-### Login `/login`
+### Login `POST /login`
 
 set token cookie to user's request
 
-### User's info `/me`
+### User's info `GET /me`
 
 get basic information of logged in user
 
-### Logout `/logout`
+### Logout `/GET logout`
 
 delete token cookie to user's request
 
-## Clinic `/clinic`
+## Clinic `/clinics`
 
-### Get all `/`
+### Get all `GET /`
 
 get all clinics
 
-## Dentist `dentist`
+## Dentist `dentists`
 
-### Get all `/`
+### Get all `GET /`
 
-get all
+get all + avg rating for each dentist
 
-### Get one `/:id`
+### Get one `GET /:id`
 
-### Update `/:id`
+get info by id
 
-### Delete `/:id`
+### Create dentist `POST /`
+
+create new dentist in system
+
+### Update `PUT /:id`
+
+update dentist info
+
+### Delete `DELETE /:id`
+
+delete dentist
+
+## Appointment `/appointments`
+
+### Get all `GET /`
+
+get all appointment of user
+
+### Get one `GET /:id`
+
+get single appointment
+
+### Create appointment `POST /`
+
+add new appointment
+
+### Update appointment `PUT /:id`
+
+update appointment
+
+### Delete appointment `DELETE /:id`
+
+delete appointment
+
+## Review `/review`
+
+### Add review `POST /`
+
+add new review
+
+### Get all `GET /`
+
+get all review of dentists
+
+### Update review `PUT /:id`
+
+update review
+
+### Delete review `DELETE /:id`
+
+delete review
