@@ -181,7 +181,7 @@
  * /dentists/{id}:
  *   delete:
  *     summary: Remove the dentist by id
- *     tags: [dentists]
+ *     tags: [Dentists]
  *     parameters:
  *       - in: path
  *         name: id
