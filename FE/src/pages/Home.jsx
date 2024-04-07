@@ -4,8 +4,7 @@ function Home() {
   return (
     <>
       <section className="heading">
-        <h1>Vac Q: A Vaccine Booking System</h1>
-        <p>Please choose from an option below</p>
+        <h1>A Dentist Booking System</h1>
       </section>
       <Link to="/new-ticket" className="btn btn-reverse btn-block">
         <FaQuestionCircle />
@@ -13,7 +12,7 @@ function Home() {
       </Link>
       <Link to="/tickets" className="btn btn-block">
         <FaTicketAlt />
-        View My Appointments
+        View My Appointment
       </Link>
     </>
   );
