@@ -86,6 +86,11 @@ const appointments = require("./routes/appointments");
 // Mount routers
 app.use("/api/v1/appointments", appointments);
 
+const reviews = require("./routes/reviews");
+
+// Mount routers
+app.use("/api/v1/reviews", reviews);
+
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(

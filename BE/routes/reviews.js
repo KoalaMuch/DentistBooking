@@ -19,3 +19,5 @@ router
   .route("/:id")
   .put(protect, authorize("user", "admin"), updateReview)
   .delete(protect, authorize("user", "admin"), deleteReview);
+
+module.exports = router;
