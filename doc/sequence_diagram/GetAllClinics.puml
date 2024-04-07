@@ -1,8 +1,8 @@
-@startuml Manage Clinic (GET)
+@startuml Manage Clinic (GET ALL)
 
 header Dentist Booking Sequence Diagram
 footer Page %page% of %lastpage%
-title "Manage Clinic (GET)"
+title "Manage Clinic (GET ALL)"
 
 participant "Client" as client
 participant "<<javaScript>>\n:server" as server
@@ -16,8 +16,8 @@ server->routerClinics ++:app.use('/clinics',clinics)
 routerClinics -> controllersClinics ++:getClinics()
 controllersClinics->modelClinic ++:find()
 modelClinic ->ClinicsDatabase ++: ClinicSchema
-ClinicsDatabase --> modelClinic --: clinic
-controllersClinics <-- modelClinic --:clinic
+ClinicsDatabase --> modelClinic --: clinics
+controllersClinics <-- modelClinic --:clinics
 controllersClinics->client --:response
 
 @enduml
