@@ -1,7 +1,10 @@
 import Pagination from "@mui/material/Pagination";
-const DentPagination = () => {
+const DentPagination = ({ count = 1 }) => {
   return (
-    <Pagination sx={{ display: "flex", justifyContent: "center" }} count={10} />
+    <Pagination
+      sx={{ display: "flex", justifyContent: "center" }}
+      count={count}
+    />
   );
 };
 export default DentPagination;

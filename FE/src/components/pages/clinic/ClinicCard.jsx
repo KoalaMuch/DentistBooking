@@ -22,12 +22,12 @@ const DentCardContent = ({ children, clickable, onClick }) => {
 };
 
 const ClinicCard = ({ clinicInfo, clickable, hideImg }) => {
-  const { id, name, district, province, postalcode, tel, region } = clinicInfo;
+  const { id, name, address, district, province, tel } = clinicInfo;
   const navigate = useNavigate();
   const onClickCard = (clinicId) => {
     navigate(clinicId);
   };
-  console.log(clinicInfo);
+
   return (
     <Card>
       <DentCardContent
@@ -48,26 +48,41 @@ const ClinicCard = ({ clinicInfo, clickable, hideImg }) => {
             gutterBottom
             variant="h5"
             component="div"
+            sx={{
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
           >
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            <Grid container spacing={2}>
-              <Grid textAlign={"left"} item sm={3} xs={12}>
+            <Grid container spacing={0.5} sx={{ mb: 1 }}>
+              <Grid textAlign={"left"} item sm={4} xs={12}>
                 <FaPhone style={{ transform: "rotate(120deg)" }} />
                 Tel:
               </Grid>
-              <Grid textAlign={"left"} item sm={9} xs={12}>
+              <Grid textAlign={"left"} item sm={8} xs={12}>
                 {tel}
               </Grid>
             </Grid>
-            <Grid container spacing={2}>
-              <Grid textAlign={"left"} item sm={3.5} xs={12}>
+            <Grid container spacing={0.5}>
+              <Grid textAlign={"left"} item sm={4} xs={12}>
                 <FaAddressBook />
                 Address:
               </Grid>
-              <Grid textAlign={"left"} item sm={8.5} xs={12}>
-                {province},{district}
+              <Grid
+                textAlign={"left"}
+                item
+                sm={8}
+                xs={12}
+                sx={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {address},{province},{district}
               </Grid>
             </Grid>
           </Typography>
