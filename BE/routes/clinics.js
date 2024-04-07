@@ -15,7 +15,7 @@
  *      id:
  *         type: string
  *         format: uuid
- *         description: The auto-generated id of the hospital
+ *         description: The auto-generated id of the clinic
  *         example: 290f1ee-6c54-4b01-90e6-d701748f0851
  *      name:
  *          type: string
@@ -61,7 +61,7 @@
  * @swagger
  * /clinic:
  *  get:
- *    summary: Returns the list of all the hospitals
+ *    summary: Returns the list of all the clinics
  *    tags: [Clinics]
  *    responses:
  *     200:
