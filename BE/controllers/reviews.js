@@ -3,7 +3,6 @@ const Review = require("../models/Review");
 //@desc Get all reviews of the dentist
 //@route GET /api/v1/reviews
 //@access Public
-
 exports.getReviews = async (req, res, next) => {
   try {
     const reviews = await Review.find({ dentist: req.params.dentistId });
