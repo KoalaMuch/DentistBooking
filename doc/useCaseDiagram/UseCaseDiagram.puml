@@ -5,21 +5,32 @@ rectangle "Dentist Booking System" as VacQSystem {
     usecase "Login" as login
     usecase "Logout" as logout
     usecase "Register" as register
-    usecase "View\nMy Profile" as viewUserInformation
-    usecase "View Dentist Review" as viewDentistReview
-    usecase ""
-    usecase "View\nHospitals" as viewHospitals
+    usecase "View\nMy Profile" as viewUserProfile
+    usecase "View\nClinics" as viewClinics
+    usecase "View\nDentists" as viewDentists
+    usecase "Manage\nDentist" as manageDentist
+    usecase "View\nAppointments" as viewAppt
     usecase "Manage\nAppointment" as manageAppt
-    usecase "Manage\nHospital" as manageHospital
 }
 
 user -- register
-user -- viewHospitals
+user -- login
+user -- logout
+user -- viewUserProfile
+user -- viewClinics
+user -- viewDentists
+user -- viewAppt
 user -- manageAppt
 
 actor "Admin" as admin
 register -- admin
-manageHospital -- admin
+login -- admin
+logout -- admin
+viewUserProfile -- admin
+viewClinics -- admin
+viewDentists -- admin
+manageDentist -- admin
+viewAppt -- admin
 manageAppt -- admin
 
 @enduml
