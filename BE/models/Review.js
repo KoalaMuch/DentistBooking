@@ -22,4 +22,5 @@ const ReviewSchema = new mongoose.Schema({
     required: [true, "Please add a comment"],
   },
 });
+
 module.exports = mongoose.model("Review", ReviewSchema);
