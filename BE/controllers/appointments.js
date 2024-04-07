@@ -1,6 +1,8 @@
 const Appointment = require("../models/Appointment");
 const Dentist = require("../models/Dentist");
 
+const limit = process.env.APPOINTMENT_LIMIT || 1;
+
 //@desc Get all appointments
 //@route GET /api/v1/appointments
 //@access Public
@@ -65,14 +67,14 @@ exports.addAppointment = async (req, res, next) => {
     // Check for exist appointment
     const existedAppointments = await Appointment.find({ user: req.user.id });
 
-    // If the user is not admin, they can only create 3 appointment.
-    if (req.user.role !== "admin" && existedAppointments.length >= 1) {
+    // If the user is not admin, they can only create 1 appointment.
+    if (req.user.role !== "admin" && existedAppointments.length >= limit) {
       return res.status(400).json({
         success: false,
         message:
           "The user with ID " +
           req.user.id +
-          " has already booked 3 appointments",
+          `has already booked ${limit} appointments`,
       });
     }
 
@@ -115,7 +117,7 @@ exports.updateAppointment = async (req, res, next) => {
     ) {
       return res.status(401).json({
         success: false,
-        message: `User ${req.params.id} is not authorized to update this appointment`,
+        message: `User ${req.user.id} is not authorized to update this appointment`,
       });
     }
 
@@ -152,7 +154,7 @@ exports.deleteAppointment = async (req, res, next) => {
     ) {
       return res.status(401).json({
         success: false,
-        message: `User ${req.params.id} is not authorized to delete this appointment`,
+        message: `User ${req.user.id} is not authorized to delete this appointment`,
       });
     }
 

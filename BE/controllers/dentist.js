@@ -55,6 +55,24 @@ exports.getDentists = async (req, res, next) => {
     // Executing query
     const dentists = await query;
 
+    for (var i = 0; i < dentists.length; i++) {
+      dentists[i]["avgRating"] = await Review.aggregate([
+        {
+          $match: {
+            dentist: dentists[i]._id,
+          },
+        },
+        {
+          $group: {
+            _id: null,
+            average: {
+              $avg: "$rating",
+            },
+          },
+        },
+      ]);
+    }
+
     // Pagination result
     const pagination = {};
 
@@ -93,23 +111,7 @@ exports.getDentist = async (req, res, next) => {
     if (!dentist) {
       return res.status(400).json({ success: false });
     }
-    dentist["avgRating"] = await Review.aggregate([
-      {
-        $match: {
-          dentist: req.param.id,
-        },
-      },
-      {
-        $group: {
-          _id: null,
-          average: {
-            $avg: "rating",
-          },
-        },
-      },
-    ])
-      .status(200)
-      .json({ success: true, data: dentist });
+    res.status(200).json({ success: true, data: dentist });
   } catch (err) {
     res.status(400).json({ success: false });
   }
