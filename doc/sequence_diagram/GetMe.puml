@@ -7,13 +7,15 @@ title "Manage Auth (Get Me)"
 participant "Client" as client
 participant "<<javaScript>>\n:server" as server
 participant "<<router>>\n:auth" as routerAuth
+participant "<<middleware>>\n:authMiddleware" as authMiddleware
 participant "<<controllers>>\n:auth" as controllersAuth
 participant "<<model>>\n:User" as modelUser
 database "<<MongoDB>>\n:User" as UsersDatabase
 
 client->server ++:req.post('/auth/me')
 server->routerAuth ++:app.use('/auth',auth)
-routerAuth -> controllersAuth ++:getMe()
+routerAuth->authMiddleware ++:protect()
+authMiddleware -> controllersAuth ++:getMe()
 controllersAuth->modelUser ++:findById(req.user.id)
 modelUser ->UsersDatabase ++: UserSchema
 UsersDatabase --> modelUser --: user
