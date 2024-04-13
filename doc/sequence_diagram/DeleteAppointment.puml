@@ -16,10 +16,17 @@ client->server ++:req.delete('/appointments/:id')
 server->routerAppointments ++:app.use('/appointments',appointments)
 routerAppointments->authMiddleware ++:protect()
 authMiddleware -> controllersAppointments ++:deleteAppointment()
+controllersAppointments->modelAppointment ++:findById(req.params.id)
+modelAppointment ->AppointmentsDatabase ++: AppointmentSchema
+AppointmentsDatabase --> modelAppointment --: appointment
+alt req.user.id == appointment.user or req.user.role == admin
 controllersAppointments->modelAppointment ++:deleteOne()
 modelAppointment ->AppointmentsDatabase ++: AppointmentSchema
 AppointmentsDatabase --> modelAppointment --:
 controllersAppointments <-- modelAppointment --:
 controllersAppointments->client --:response
-
+    
+    else req.user.id != appointment.user or req.user.role != admin
+controllersAppointments->client --:response
+    end
 @enduml

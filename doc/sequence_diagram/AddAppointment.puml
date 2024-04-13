@@ -17,6 +17,7 @@ database "<<MongoDB>>\n:dentists" as DentistsDatabase
 client->server ++:req.post('/dentist/:dentistId/appointments')
 server->routerAppointments ++:app.use('/appointments',appointments)
 routerAppointments->authMiddleware ++:protect()
+authMiddleware->authMiddleware ++:authorize('user')
 authMiddleware->controllersAppointments ++:addAppointment()
 
 alt Check if appointment reach limit
