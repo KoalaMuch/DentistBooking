@@ -53,10 +53,10 @@ exports.getDentists = async (req, res, next) => {
     query = query.skip(startIndex).limit(limit);
 
     // Executing query
-    const dentists = await query;
+    var dentists = await query;
 
     for (var i = 0; i < dentists.length; i++) {
-      dentists[i]["avgRating"] = await Review.aggregate([
+      const aggrResult = await Review.aggregate([
         {
           $match: {
             dentist: dentists[i]._id,
@@ -71,6 +71,16 @@ exports.getDentists = async (req, res, next) => {
           },
         },
       ]);
+      dentists[i] = {
+        _id: dentists[i].clinic,
+        name: dentists[i].name,
+        yearOfExp: dentists[i].yearOfExp,
+        areaOfExpertise: dentists[i].areaOfExpertise,
+        clinic: dentists[i].clinic,
+        appointments: dentists[i].appointments,
+        avgRating: aggrResult[0]?.average,
+      };
+      console.log(aggrResult[0]?.average);
     }
 
     // Pagination result
