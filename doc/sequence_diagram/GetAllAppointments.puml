@@ -16,7 +16,11 @@ client->server ++:req.get('/appointments')
 server->routerAppointments ++:app.use('/appointments',appointments)
 routerAppointments -> authMiddleware ++:protect()
 authMiddleware -> controllersAppointments ++:getAppointments()
+alt user.role === 'user'
 controllersAppointments->modelAppointment ++:find({user: req.user.id})
+else user.role === 'admin'
+controllersAppointments->modelAppointment ++:find()
+end
 modelAppointment ->AppointmentsDatabase ++: AppointmentSchema
 AppointmentsDatabase --> modelAppointment --: appointments
 controllersAppointments <-- modelAppointment --:appointments
