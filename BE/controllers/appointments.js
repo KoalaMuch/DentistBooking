@@ -74,7 +74,7 @@ exports.addAppointment = async (req, res, next) => {
         message:
           "The user with ID " +
           req.user.id +
-          `has already booked ${limit} appointments`,
+          `has already booked ${limit} appointment`,
       });
     }
 
