@@ -84,7 +84,7 @@ package "Dentist Booking System"{
 DentistBookingService ..> ResourceDentists:"/dentists\n<<Path>>"
 ResourceDentists ..> ResourceDentist: "/{dentistId}\n<<Path>>"
 ResourceDentist ..> RepresentationDentist: "<<use>>"
-ResourceDentist ..> ResourceDentistAppointments:"/reviews\n<<Path>>"
+ResourceDentist ..> ResourceDentistAppointments:"/appointments\n<<Path>>"
 ResourceDentistAppointments..>RepresentationAppointment:"<<use>>"
 
 DentistBookingService..>ResourceAuth:"/auth\n<<Path>>"
