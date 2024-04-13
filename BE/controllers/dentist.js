@@ -72,15 +72,9 @@ exports.getDentists = async (req, res, next) => {
         },
       ]);
       dentists[i] = {
-        _id: dentists[i].clinic,
-        name: dentists[i].name,
-        yearOfExp: dentists[i].yearOfExp,
-        areaOfExpertise: dentists[i].areaOfExpertise,
-        clinic: dentists[i].clinic,
-        appointments: dentists[i].appointments,
+        ...dentists[i].toObject(),
         avgRating: aggrResult[0]?.average,
       };
-      console.log(aggrResult[0]?.average);
     }
 
     // Pagination result
