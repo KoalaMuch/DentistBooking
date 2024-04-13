@@ -14,7 +14,7 @@ database "<<MongoDB>>\n:User" as UsersDatabase
 client->server ++:req.post('/auth/register')
 server->routerAuth ++:app.use('/auth',auth)
 routerAuth -> controllersAuth ++:register()
-controllersAuth->modelUser ++:create()
+controllersAuth->modelUser ++:create(req.body)
 modelUser ->UsersDatabase ++: UserSchema
 UsersDatabase --> modelUser --: user
 controllersAuth <-- modelUser --:user

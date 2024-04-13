@@ -20,6 +20,12 @@ UsersDatabase --> modelUser --: user
 controllersAuth <-- modelUser --:user
 controllersAuth->modelUser ++:matchPassword(password)
 controllersAuth <-- modelUser --:isMatch
-controllersAuth->client --:response
+alt password match
+    controllersAuth->modelUser ++:getSignJwtToken()
+    controllersAuth <-- modelUser --:token
+    controllersAuth->client --:response
+else not match
+    controllersAuth->client --:response
+end
 
 @enduml
