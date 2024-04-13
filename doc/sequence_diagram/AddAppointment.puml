@@ -7,6 +7,7 @@ title "Manage Appointment (POST)"
 participant "Client" as client
 participant "<<javaScript>>\n:server" as server
 participant "<<router>>\n:appointments" as routerAppointments
+participant "<<middleware>>\n:authMiddleware" as authMiddleware
 participant "<<controllers>>\n:appointments" as controllersAppointments
 participant "<<model>>\n:Appointment" as modelAppointment
 participant "<<model>>\n:Dentist" as modelDentist
@@ -15,7 +16,8 @@ database "<<MongoDB>>\n:dentists" as DentistsDatabase
 
 client->server ++:req.post('/dentist/:dentistId/appointments')
 server->routerAppointments ++:app.use('/appointments',appointments)
-routerAppointments -> controllersAppointments ++:addAppointment()
+routerAppointments->authMiddleware ++:protect()
+authMiddleware->controllersAppointments ++:addAppointment()
 
 alt Check if appointment reach limit
     controllersAppointments->modelAppointment ++:find({user: req.user.id})
